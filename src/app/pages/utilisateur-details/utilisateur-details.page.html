@@ -1,9 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>utilisateurDetails</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Liste des utilisateurs</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+
+  <ion-list lines="full">
+    <h2>Ajouter</h2>
+    <ion-item>
+      <ion-label>Nom</ion-label>
+      <ion-input required type="text" [(ngModel)]="utilisateur.nom"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prenom</ion-label>
+      <ion-input required type="text" [(ngModel)]="utilisateur.prenom"></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <ion-button expand="full" (click)="saveUtilisateur()">Enregistrer</ion-button>
+
 
 </ion-content>

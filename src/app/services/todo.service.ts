@@ -55,7 +55,6 @@ export class TodoService {
   readTodosDate(){
     this.todos;
     console.log(this.todos);
-
   }
   checkUsageOfDate(){
     const listedesAffectations = this.todos;

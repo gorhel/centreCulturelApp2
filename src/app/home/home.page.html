@@ -16,40 +16,127 @@
     </div>
   </ion-card>
 
-  <ion-list>
-    <ng-container *ngIf="!todos || todos.length == 0">
-      <div *ngFor="let n of [0,1,2]" padding>
-        <ion-skeleton-text></ion-skeleton-text>
-        <p>
-          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
-        </p>
-      </div>
-    </ng-container>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Todo List</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ng-container *ngIf="!todos || todos.length == 0">
+          <div *ngFor="let n of [0,1,2]" padding>
+            <ion-skeleton-text></ion-skeleton-text>
+            <p>
+              <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+            </p>
+          </div>
+        </ng-container>
 
-    <ion-item-sliding *ngFor="let item of todos">
-      <ion-item>
-        <ion-label>
-          {{item.priority + " " + item.task}}
-          <p>{{item.dateUse | date:'medium'}}</p>
-        </ion-label>
-        <ion-note slot="end" color="primary">{{item.property}}</ion-note>
-      </ion-item>
+        <ion-item-sliding *ngFor="let item of todos">
+          <ion-item>
+            <ion-label>
+              {{item.priority + " " + item.task}}
+              <p>{{item.dateUse | date:'medium'}}</p>
+            </ion-label>
+            <ion-note slot="end" color="primary">{{item.property}}</ion-note>
+          </ion-item>
 
-      <ion-item-options side="end">
-        <ion-item-option (click)="remove(item)" color="danger">
-          <ion-icon slot="top" name="trash"></ion-icon>
-          Supprimer
-        </ion-item-option>
-        <ion-item-option button [routerLink]="['/details', item.id]" color="secondary">
-          <ion-icon slot="top" name="create"></ion-icon>
-          Modifier
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+          <ion-item-options side="end">
+            <ion-item-option (click)="remove(item)" color="danger">
+              <ion-icon slot="top" name="trash"></ion-icon>
+              Supprimer
+            </ion-item-option>
+            <ion-item-option button [routerLink]="['/details', item.id]" color="secondary">
+              <ion-icon slot="top" name="create"></ion-icon>
+              Modifier
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-  </ion-list>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Liste des ordinateurs</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-list>
+        <ng-container *ngIf="!ordinateurs || ordinateurs.length == 0">
+          <div *ngFor="let n of [0,1,2, 3]" padding>
+            <ion-skeleton-text></ion-skeleton-text>
+            <p>
+              <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+            </p>
+          </div>
+        </ng-container>
+
+        <ion-item-sliding *ngFor="let item of ordinateurs">
+          <ion-item>
+            <ion-label>
+              {{item.nomOrdinateur}}
+              <p></p>
+            </ion-label>
+            <ion-note slot="end" color="primary"></ion-note>
+          </ion-item>
+
+          <ion-item-options side="end">
+            <ion-item-option (click)="remove(item)" color="danger">
+              <ion-icon slot="top" name="trash"></ion-icon>
+              Supprimer
+            </ion-item-option>
+            <ion-item-option button [routerLink]="['/ordinateurs', item.id]" color="secondary">
+              <ion-icon slot="top" name="create"></ion-icon>
+              Modifier
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Liste des Utilisateurs</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-list>
+        <ng-container *ngIf="!utilisateurs || utilisateurs.length == 0">
+          <div *ngFor="let n of [0,1,2, 3]" padding>
+            <ion-skeleton-text></ion-skeleton-text>
+            <p>
+              <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+            </p>
+          </div>
+        </ng-container>
+
+        <ion-item-sliding *ngFor="let item of utilisateurs">
+          <ion-item>
+            <ion-label>
+              {{item.nom}} {{item.prenom}}
+              <p></p>
+            </ion-label>
+            <ion-note slot="end" color="primary"></ion-note>
+          </ion-item>
+
+          <ion-item-options side="end">
+            <ion-item-option (click)="remove(item)" color="danger">
+              <ion-icon slot="top" name="trash"></ion-icon>
+              Supprimer
+            </ion-item-option>
+            <ion-item-option button [routerLink]="['/utilisateurs', item.id]" color="secondary">
+              <ion-icon slot="top" name="create"></ion-icon>
+              Modifier
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="center" horizontal="center" slot="fixed">
     <ion-fab-button color="warning">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
@@ -66,6 +153,11 @@
     <ion-fab-list side="bottom">
       <ion-fab-button color="danger">
         <ion-icon name="desktop" routerLink="/ordinateurs" routerDirection="forward"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="end">
+      <ion-fab-button color="danger">
+        <ion-icon name="desktop" routerLink="/utilisateurs" routerDirection="forward"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>

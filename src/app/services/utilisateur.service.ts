@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Utilisateur{
-  idUtilisateur:string;
   nom:string;
   prenom:string;
 }
@@ -18,7 +17,7 @@ export class UtilisateurService {
   private utilisateurs: Observable<Utilisateurs[]>;
 
   constructor(db: AngularFirestore) {
-    this.utilisateursCollection = db.collection<Utilisateur>('Utilisateurs');
+    this.utilisateursCollection = db.collection<Utilisateur>('utilisateurs');
 
     this.utilisateurs = this.utilisateursCollection.snapshotChanges().pipe(
       map(actions =>{

@@ -3,10 +3,41 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Liste des Affectations</ion-title>
+    <ion-title>Liste des affectations</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-label>utilisateur</ion-label>
+      <ion-input required type="text" [(ngModel)]="affectation.utilisateur"></ion-input>
+    </ion-item>
 
+    <ion-item>
+    <ion-label>Ordinateur</ion-label>
+    <ion-select value="brown" okText="Valider" cancelText="Annuler" [(ngModel)]="affectation.ordinateurT">
+      <ion-select-option value="Ordinateur1">Ordinateur 1</ion-select-option>
+      <ion-select-option value="Ordinateur2">Ordinateur 2</ion-select-option>
+      <ion-select-option value="Ordinateur3">Ordinateur 3</ion-select-option>
+      <ion-select-option value="Ordinateur4">Ordinateur 4</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="D MMM YYYY H:mm"  value="" minuteValues="0" hourValues="{{ openHours }}" monthValues="{{openMonths}}" min="2019" doneText="Valider"  cancelText="Annuler" [(ngModel)]="affectation.date"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>heure</ion-label>
+      <ion-input required type="text" [(ngModel)]="affectation.heure"></ion-input>
+    </ion-item>
+    <p> vue de la page html </p>
+    <p> liste des heures{{ openHours }}</p>
+    <p> liste des heures{{ openMonths }}</p>
+    <a href="{{ openHours }}">jjj</a>
+    <img src="{{ openHours }}" alt="{{ openHours }}">
+  </ion-list>
+  <ion-button expand="full" (click)="saveTodo()">Enregistrer</ion-button>
 </ion-content>

@@ -1,4 +1,7 @@
 import { Todo, TodoService} from './../services/todo.service';
+import { Ordinateur, OrdinateurService } from './../services/ordinateur.service';
+import { Utilisateur, UtilisateurService } from './../services/utilisateur.service';
+import { Affectation, AffectationService } from './../services/affectation.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,16 +12,32 @@ import { Component, OnInit } from '@angular/core';
 export class HomePage implements OnInit {
 
   todos: Todo[];
+  ordinateurs: Ordinateur[];
+  utilisateurs: Utilisateur[];
+  affectations: Affectation[];
 
-  constructor(private todoService: TodoService){}
+  constructor(private todoService: TodoService, private ordinateurService: OrdinateurService, private utilisateurService: UtilisateurService, private affectationService: AffectationService){}
 
     ngOnInit(){
       this.todoService.getTodos().subscribe(res => {
         this.todos = res;
       });
+      this.ordinateurService.getOrdinateurs().subscribe(res => {
+        this.ordinateurs = res;
+      });
+      this.utilisateurService.getUtilisateurs().subscribe(res => {
+        this.utilisateurs = res;
+      });
+      this.affectationService.getAffectations().subscribe(res => {
+        this.affectations = res;
+      });
     }
+
 
     remove(item){
       this.todoService.removeTodo(item.id);
+      this.ordinateurService.removeOrdinateur(item.id);
+      this.utilisateurService.removeUtilisateur(item.id);
+      this.affectationService.removeAffectation(item.id);
     }
 }

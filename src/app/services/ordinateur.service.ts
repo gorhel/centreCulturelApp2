@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Ordinateur{
-  idOrdinateur:string;
   nomOrdinateur:string;
 }
 @Injectable({
@@ -17,7 +16,7 @@ export class OrdinateurService {
   private ordinateurs: Observable<Ordinateur[]>;
 
   constructor(db: AngularFirestore) {
-    this.ordinateursCollection = db.collection<Ordinateur>('Ordinateurs');
+    this.ordinateursCollection = db.collection<Ordinateur>('ordinateurs');
 
     this.ordinateurs = this.ordinateursCollection.snapshotChanges().pipe(
       map(actions =>{
@@ -27,7 +26,7 @@ export class OrdinateurService {
           return {id, ...data};
         });
       })
-    )
+    );
   }
 
   getOrdinateurs(){

@@ -12,7 +12,6 @@ import { NavController, LoadingController } from '@ionic/angular';
 export class OrdinateurDetailsPage implements OnInit {
 
   ordinateur: Ordinateur = {
-    idOrdinateur:'',
     nomOrdinateur:''
   };
 
