@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-label>Nom</ion-label>
+      <ion-input required type="text" [(ngModel)]="todo.task"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prenom</ion-label>
+      <ion-input required type="text" [(ngModel)]="todo.priority"></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-label>Ordinateur</ion-label>
+    <ion-select value="brown" okText="Valider" cancelText="Annuler" [(ngModel)]="todo.ordinateurT">
+      <ion-select-option value="Ordinateur1">Ordinateur 1</ion-select-option>
+      <ion-select-option value="Ordinateur2">Ordinateur 2</ion-select-option>
+      <ion-select-option value="Ordinateur3">Ordinateur 3</ion-select-option>
+      <ion-select-option value="Ordinateur4">Ordinateur 4</ion-select-option>
+    </ion-select>
+  </ion-item>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="D MMM YYYY H:mm"  value="" minuteValues="0" hourValues="{{ openHours }}" monthValues="{{openMonths}}" min="2019" doneText="Valider"  cancelText="Annuler" [(ngModel)]="todo.dateUse"></ion-datetime>
+    </ion-item>
+    <p> vue de la page html {{todo.dateUse | date:'H'}}</p>
+    <p> liste des heures{{ openHours }}</p>
+    <p> liste des heures{{ openMonths }}</p>
+    <a href="{{ openHours }}">jjj</a>
+    <img src="{{ openHours }}" alt="{{ openHours }}">
+  </ion-list>
+  <ion-button expand="full" (click)="saveTodo()">Enregistrer</ion-button>
+</ion-content>
