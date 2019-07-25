@@ -16,11 +16,13 @@
 
     <ion-item>
     <ion-label>Ordinateur</ion-label>
-    <ion-select value="brown" okText="Valider" cancelText="Annuler" [(ngModel)]="affectation.ordinateurT">
+    <ion-select value="brown" okText="Valider" cancelText="Annuler" [(ngModel)]="affectation.ordinateur">
+      <ion-select-option *ngFor="let item of ordinateur" value="{{ item.nomOrdinateur }}">{{ item.nomOrdinateur }}</ion-select-option>
+    <!--
       <ion-select-option value="Ordinateur1">Ordinateur 1</ion-select-option>
       <ion-select-option value="Ordinateur2">Ordinateur 2</ion-select-option>
       <ion-select-option value="Ordinateur3">Ordinateur 3</ion-select-option>
-      <ion-select-option value="Ordinateur4">Ordinateur 4</ion-select-option>
+    -->
     </ion-select>
   </ion-item>
 
@@ -39,5 +41,5 @@
     <a href="{{ openHours }}">jjj</a>
     <img src="{{ openHours }}" alt="{{ openHours }}">
   </ion-list>
-  <ion-button expand="full" (click)="saveTodo()">Enregistrer</ion-button>
+  <ion-button expand="full" (click)="saveAffectation()">Enregistrer</ion-button>
 </ion-content>

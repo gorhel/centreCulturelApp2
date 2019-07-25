@@ -1,4 +1,5 @@
 import { Affectation, AffectationService } from './../../services/affectation.service';
+import { Ordinateur, OrdinateurService } from './../../services/ordinateur.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
@@ -19,14 +20,21 @@ export class AffectationDetailsPage implements OnInit {
   };
 
   affectationId = null;
+  //let selectOptions: Array<string> = ['Apple', 'Orange', 'Banana'];
+  //selectOptions = ["Option 1", "Option 2", "Option 3"];
+  selectOptions = [];
+  ordinateur: Ordinateur[];
 
-  constructor(private route: ActivatedRoute, private nav: NavController, private affectationService: AffectationService, private loadingController: LoadingController) { }
+  constructor(private route: ActivatedRoute, private nav: NavController, private affectationService: AffectationService, private ordinateurService: OrdinateurService, private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.affectationId = this.route.snapshot.params['id'];
     if(this.affectationId){
       this.loadAffectation();
     }
+    this.ordinateurService.getOrdinateurs().subscribe(res => {
+      this.ordinateur = res;
+    });
   }
 
   async loadAffectation(){
