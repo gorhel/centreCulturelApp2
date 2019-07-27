@@ -15,6 +15,7 @@ export class HomePage implements OnInit {
   ordinateurs: Ordinateur[];
   utilisateurs: Utilisateur[];
   affectations: Affectation[];
+  affectationSelect = [7, 8, 9, 10, 11, 14, 15, 16, 17];
 
   constructor(private todoService: TodoService, private ordinateurService: OrdinateurService, private utilisateurService: UtilisateurService, private affectationService: AffectationService){}
 

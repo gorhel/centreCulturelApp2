@@ -1,5 +1,6 @@
 import { Affectation, AffectationService } from './../../services/affectation.service';
 import { Ordinateur, OrdinateurService } from './../../services/ordinateur.service';
+import { Utilisateur, UtilisateurService } from './../../services/utilisateur.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
@@ -15,17 +16,24 @@ export class AffectationDetailsPage implements OnInit {
   affectation: Affectation = {
     utilisateur: '',
     ordinateur: '',
-    date: '',
-    heure: ''
+    heureSelected:''
   };
 
   affectationId = null;
-  //let selectOptions: Array<string> = ['Apple', 'Orange', 'Banana'];
-  //selectOptions = ["Option 1", "Option 2", "Option 3"];
-  selectOptions = [];
   ordinateur: Ordinateur[];
+  utilisateur: Utilisateur[];
+  affectation: Affectation[];
+  affectations: Affectation[];
+  affectationSelect = [7, 8, 9, 10, 11, 14, 15, 16, 17];
+  public emptyHours = [7];
 
-  constructor(private route: ActivatedRoute, private nav: NavController, private affectationService: AffectationService, private ordinateurService: OrdinateurService, private loadingController: LoadingController) { }
+  constructor(
+    private route: ActivatedRoute,
+    private nav: NavController,
+    private affectationService: AffectationService,
+    private ordinateurService: OrdinateurService,
+    private utilisateurService: UtilisateurService,
+    private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.affectationId = this.route.snapshot.params['id'];
@@ -35,6 +43,16 @@ export class AffectationDetailsPage implements OnInit {
     this.ordinateurService.getOrdinateurs().subscribe(res => {
       this.ordinateur = res;
     });
+    this.utilisateurService.getUtilisateurs().subscribe(res => {
+      this.utilisateur = res;
+    });
+    this.affectationService.getAffectations().subscribe(res => {
+      this.affectations = res;
+    });
+    /*
+    this.affectationService.getAffectations().subscribe(res => {
+      this.affectation = res;
+    });*/
   }
 
   async loadAffectation(){
@@ -67,5 +85,31 @@ export class AffectationDetailsPage implements OnInit {
       });
     }
   }
+
+   getAffectationsHours(){
+    const i;
+    this.affectations.forEach(function (value) {
+      console.log(value);
+    });
+    const emptyHours = this.affectation.heureSelected;
+    //savoir si emptyHours existe dans affectationSelect
+    console.log("avant le slice", this.affectationSelect);
+    for (i=0; i < this.emptyHours.length ; i++ ){
+      if(this.affectationSelect.indexOf(this.emptyHours[i])){
+        this.affectationSelect.splice(this.affectationSelect.indexOf(this.emptyHours[i]), 1);
+      }
+    }
+    /*
+    console.log("index de la recherche", this.affectationSelect.indexOf(this.emptyHours[0]));
+    console.log("valeur de la recherche qui sera enlevée de la liste", this.emptyHours);
+    //this.emptyHours = this.affectationSelect;
+    console.log("avant le slice", this.emptyHours);
+    this.affectationSelect.splice(this.affectationSelect.indexOf(this.emptyHours[0]), 1);
+    console.log("apres le slice", this.emptyHours);*/
+    console.log("apres le slice", this.affectationSelect);
+    console.log("apres le slice", this.emptyHours);
+    return this.emptyHours;
+  }
+
 
 }

@@ -14,7 +14,7 @@ export class UtilisateurService {
 
   private utilisateursCollection: AngularFirestoreCollection<Utilisateur>;
 
-  private utilisateurs: Observable<Utilisateurs[]>;
+  private utilisateurs: Observable<Utilisateur[]>;
 
   constructor(db: AngularFirestore) {
     this.utilisateursCollection = db.collection<Utilisateur>('utilisateurs');

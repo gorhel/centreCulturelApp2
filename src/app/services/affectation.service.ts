@@ -6,8 +6,7 @@ import { map } from 'rxjs/operators';
 export interface Affectation{
   utilisateur:string;
   ordinateur:string;
-  date:string;
-  heure:string;
+  heureSelected:string;
 }
 @Injectable({
   providedIn: 'root'
@@ -35,6 +34,9 @@ export class AffectationService {
   getAffectations(){
     return this.affectations;
   }
+  getAffectationsHours(){
+    return this.affectations.utilisateur;
+  }
 
   getAffectation(id){
     return this.affectationsCollection.doc<Affectation>(id).valueChanges();
@@ -47,9 +49,9 @@ export class AffectationService {
   addAffectation(affectation:Affectation){
     return this.affectationsCollection.add(affectation);
   }
+  
   removeAffectation(id){
     return this.affectationsCollection.doc(id).delete();
   }
-  checkAndExcludeDateFromAffectation(){}
 
 }

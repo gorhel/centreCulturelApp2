@@ -9,37 +9,48 @@
 
 <ion-content padding>
   <ion-list lines="full">
-    <ion-item>
+   <ion-item *ngIf="!affectation.utilisateur;">
+
       <ion-label>utilisateur</ion-label>
-      <ion-input required type="text" [(ngModel)]="affectation.utilisateur"></ion-input>
+      <ion-select  value="brown" okText="Valider" cancelText="Annuler" [(ngModel)]="affectation.utilisateur">
+        <ion-select-option *ngFor="let item of utilisateur" value="{{ item.nom }}">{{ item.nom }} {{ item.prenom }}</ion-select-option>
+      </ion-select>
+
     </ion-item>
+
+    <ion-item *ngIf="affectation.utilisateur;">
+      <ion-label>utilisateur</ion-label>
+      <ion-input required type="text" disabled [(ngModel)]="affectation.utilisateur"></ion-input>
+    </ion-item>
+
 
     <ion-item>
     <ion-label>Ordinateur</ion-label>
     <ion-select value="brown" okText="Valider" cancelText="Annuler" [(ngModel)]="affectation.ordinateur">
       <ion-select-option *ngFor="let item of ordinateur" value="{{ item.nomOrdinateur }}">{{ item.nomOrdinateur }}</ion-select-option>
-    <!--
-      <ion-select-option value="Ordinateur1">Ordinateur 1</ion-select-option>
-      <ion-select-option value="Ordinateur2">Ordinateur 2</ion-select-option>
-      <ion-select-option value="Ordinateur3">Ordinateur 3</ion-select-option>
-    -->
     </ion-select>
   </ion-item>
 
-    <ion-item>
-      <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="D MMM YYYY H:mm"  value="" minuteValues="0" hourValues="{{ openHours }}" monthValues="{{openMonths}}" min="2019" doneText="Valider"  cancelText="Annuler" [(ngModel)]="affectation.date"></ion-datetime>
+
+  </ion-list>
+  <ion-label>Date du jour</ion-label>
+  <ion-list>
+
+  <ion-radio-group [(ngModel)]="affectation.heureSelected">
+    <ion-list-header>
+      <ion-button expand="full" (click)="getAffectationsHours()">Afficher les créneaux horaires</ion-button>
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of affectationSelect">
+      <ion-label>{{ item }}h00 - {{ item+1 }}h00  </ion-label>
+      <ion-radio slot="start" value="{{ item }}" checked></ion-radio>
     </ion-item>
 
-    <ion-item>
-      <ion-label>heure</ion-label>
-      <ion-input required type="text" [(ngModel)]="affectation.heure"></ion-input>
-    </ion-item>
-    <p> vue de la page html </p>
-    <p> liste des heures{{ openHours }}</p>
-    <p> liste des heures{{ openMonths }}</p>
-    <a href="{{ openHours }}">jjj</a>
-    <img src="{{ openHours }}" alt="{{ openHours }}">
-  </ion-list>
+  </ion-radio-group>
+</ion-list>
+
+
+
+
   <ion-button expand="full" (click)="saveAffectation()">Enregistrer</ion-button>
 </ion-content>
