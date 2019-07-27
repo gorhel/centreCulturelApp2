@@ -36,21 +36,17 @@
   <ion-label>Date du jour</ion-label>
   <ion-list>
 
-  <ion-radio-group [(ngModel)]="affectation.heureSelected">
+  <ion-radio-group [(ngModel)]="affectation.heureSelected" ng-init="count=0">
     <ion-list-header>
-      <ion-button expand="full" (click)="getAffectationsHours()">Afficher les créneaux horaires</ion-button>
+      <ion-button size="default" (click)="getAffectationsHours();toggle();" >Afficher les créneaux horaires</ion-button>
     </ion-list-header>
-
-    <ion-item *ngFor="let item of affectationSelect">
+    <ion-item class="heures"  *ngFor="let item of affectationSelect">
       <ion-label>{{ item }}h00 - {{ item+1 }}h00  </ion-label>
       <ion-radio slot="start" value="{{ item }}" checked></ion-radio>
     </ion-item>
 
   </ion-radio-group>
 </ion-list>
-
-
-
 
   <ion-button expand="full" (click)="saveAffectation()">Enregistrer</ion-button>
 </ion-content>

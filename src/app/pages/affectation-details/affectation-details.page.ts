@@ -25,7 +25,7 @@ export class AffectationDetailsPage implements OnInit {
   affectation: Affectation[];
   affectations: Affectation[];
   affectationSelect = [7, 8, 9, 10, 11, 14, 15, 16, 17];
-  public emptyHours = [7];
+  public emptyHours = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -88,27 +88,27 @@ export class AffectationDetailsPage implements OnInit {
 
    getAffectationsHours(){
     const i;
+    const emptyHours = [];
+    console.log("this.emptyHours", this.emptyHours, "emptyHours", emptyHours);
+    //heures affectées
     this.affectations.forEach(function (value) {
-      console.log(value);
+      //console.log("this.emptyHours", this.emptyHours,"emptyHours", emptyHours, "--",value.heureSelected);
+      emptyHours.push(parseInt(value.heureSelected));
     });
-    const emptyHours = this.affectation.heureSelected;
+
+    //console.log("this.emptyHours", this.emptyHours,"emptyHours", emptyHours);
+  //  const emptyHours = this.affectation.heureSelected;
     //savoir si emptyHours existe dans affectationSelect
-    console.log("avant le slice", this.affectationSelect);
-    for (i=0; i < this.emptyHours.length ; i++ ){
-      if(this.affectationSelect.indexOf(this.emptyHours[i])){
-        this.affectationSelect.splice(this.affectationSelect.indexOf(this.emptyHours[i]), 1);
+    console.log("Heures d ouverture avant splice", this.affectationSelect);
+    for (i=0; i < emptyHours.length ; i++ ){
+      if(this.affectationSelect.indexOf(emptyHours[i])){
+        this.affectationSelect.splice(this.affectationSelect.indexOf(emptyHours[i]), 1);
       }
     }
-    /*
-    console.log("index de la recherche", this.affectationSelect.indexOf(this.emptyHours[0]));
-    console.log("valeur de la recherche qui sera enlevée de la liste", this.emptyHours);
-    //this.emptyHours = this.affectationSelect;
-    console.log("avant le slice", this.emptyHours);
-    this.affectationSelect.splice(this.affectationSelect.indexOf(this.emptyHours[0]), 1);
-    console.log("apres le slice", this.emptyHours);*/
-    console.log("apres le slice", this.affectationSelect);
-    console.log("apres le slice", this.emptyHours);
-    return this.emptyHours;
+    console.log("Heures d ouverture après splice", this.affectationSelect);
+    console.log("les heures bookées", emptyHours);
+    
+    return this.affectationSelect;
   }
 
 
