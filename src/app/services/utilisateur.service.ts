@@ -48,6 +48,5 @@ export class UtilisateurService {
   removeUtilisateur(id){
     return this.utilisateursCollection.doc(id).delete();
   }
-  checkAndExcludeDateFromUtilisateur(){}
 
 }

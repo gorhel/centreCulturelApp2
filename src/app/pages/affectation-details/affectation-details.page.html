@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Liste des affectations</ion-title>
+    <ion-title>Affectations du {{ todayDate  | date:'d/MM/yy'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +13,7 @@
 
       <ion-label>utilisateur</ion-label>
       <ion-select  value="brown" okText="Valider" cancelText="Annuler" [(ngModel)]="affectation.utilisateur">
-        <ion-select-option *ngFor="let item of utilisateur" value="{{ item.nom }}">{{ item.nom }} {{ item.prenom }}</ion-select-option>
+        <ion-select-option *ngFor="let item of utilisateur" value="{{ item.nom }} {{ item.prenom }}">{{ item.nom }} {{ item.prenom }}</ion-select-option>
       </ion-select>
 
     </ion-item>
@@ -24,21 +24,27 @@
     </ion-item>
 
 
-    <ion-item>
+    <ion-item *ngIf="!affectation.ordinateur;">
     <ion-label>Ordinateur</ion-label>
     <ion-select value="brown" okText="Valider" cancelText="Annuler" [(ngModel)]="affectation.ordinateur">
       <ion-select-option *ngFor="let item of ordinateur" value="{{ item.nomOrdinateur }}">{{ item.nomOrdinateur }}</ion-select-option>
     </ion-select>
   </ion-item>
 
+  <ion-item *ngIf="affectation.ordinateur;">
+    <ion-label>utilisateur</ion-label>
+    <ion-input required type="text" disabled [(ngModel)]="affectation.ordinateur"></ion-input>
+  </ion-item>
 
-  </ion-list>
-  <ion-label>Date du jour</ion-label>
-  <ion-list>
+  <ion-item>
+    <ion-label>cliquez pour voir
+      <ion-button size="small" (click)="getAffectationsHours();">les créneaux disponibles</ion-button>
+    </ion-label>
+  </ion-item>
 
-  <ion-radio-group [(ngModel)]="affectation.heureSelected" ng-init="count=0">
+  <ion-radio-group [(ngModel)]="affectation.heureSelected">
     <ion-list-header>
-      <ion-button size="default" (click)="getAffectationsHours();toggle();" >Afficher les créneaux horaires</ion-button>
+
     </ion-list-header>
     <ion-item class="heures"  *ngFor="let item of affectationSelect">
       <ion-label>{{ item }}h00 - {{ item+1 }}h00  </ion-label>

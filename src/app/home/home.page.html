@@ -16,45 +16,6 @@
     </div>
   </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Todo List</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ng-container *ngIf="!todos || todos.length == 0">
-          <div *ngFor="let n of [0,1,2]" padding>
-            <ion-skeleton-text></ion-skeleton-text>
-            <p>
-              <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
-            </p>
-          </div>
-        </ng-container>
-
-        <ion-item-sliding *ngFor="let item of todos; trackBy: task">
-          <ion-item>
-            <ion-label>
-              {{item.priority + " " + item.task}}
-              <p>{{item.dateUse | date:'medium'}}</p>
-            </ion-label>
-            <ion-note slot="end" color="primary">{{item.property}}</ion-note>
-          </ion-item>
-
-          <ion-item-options side="end">
-            <ion-item-option (click)="remove(item)" color="danger">
-              <ion-icon slot="top" name="trash"></ion-icon>
-              Supprimer
-            </ion-item-option>
-            <ion-item-option button [routerLink]="['/details', item.id]" color="secondary">
-              <ion-icon slot="top" name="create"></ion-icon>
-              Modifier
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
   <ion-toolbar color="successs">
     <ion-title>Liste des affectations</ion-title>
   </ion-toolbar>
@@ -75,7 +36,7 @@
           <ion-item>
             <ion-label>
               {{item.utilisateur}} {{item.prenom}} - {{ item.ordinateur}}
-              <p>{{ item.date | date:'mediumDate'}} {{ item.heure | date:'H:mm'}}</p>
+              <p>{{ item.heureSelected }}h00</p>
             </ion-label>
             <ion-note slot="end" color="primary"></ion-note>
           </ion-item>
@@ -91,38 +52,6 @@
             </ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
-        <ion-item>
-<!--
-           <ion-label>Ensemble des affectations</ion-label>
-           <ion-select  value="brown" okText="Valider" cancelText="Annuler" [(ngModel)]="affectationSelect">
-             <ion-select-option *ngFor="let item of affectationSelect" value="{{ item }}">{{ item }}</ion-select-option>
-           </ion-select>
-           -->
-           <ion-label *ngFor="let item of affectationSelect">{{ item }}</ion-label><br>
-
-         </ion-item>
-         <ion-item *ngFor="let item of ordinateurs">
-
-            <ion-label>{{ item.nomOrdinateur }}</ion-label><br>
-
-          </ion-item>
-          <ion-item *ngFor="let item of affectations">
-
-             <ion-label>{{ item.heureSelected }}</ion-label><br>
-
-           </ion-item>
-
-           <ion-item>
-
-              <ion-label *ngFor="let itemSelect of affectationSelect">
-                <div *ngFor="let itemUsed of affectations">
-                <p *ngIf="itemUsed.heureSelected == itemSelect">{{itemSelect}}</p>
-              </div>
-              </ion-label>
-
-            </ion-item>
-
-
       </ion-list>
     </ion-card-content>
   </ion-card>
@@ -194,7 +123,7 @@
           </ion-item>
 
           <ion-item-options side="end">
-            <ion-item-option (click)="removeUtilisateur(item)" color="danger">
+            <ion-item-option (click)="remove(item)" color="danger">
               <ion-icon slot="top" name="trash"></ion-icon>
               Supprimer
             </ion-item-option>
@@ -208,28 +137,23 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-fab vertical="center" horizontal="center" slot="fixed">
+  <ion-fab vertical="" horizontal="end" slot="fixed">
     <ion-fab-button color="warning">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button color="secondary">
-        <ion-icon name="person-add" routerLink="/details" routerDirection="forward"></ion-icon>
+    <ion-fab-list side="bottom">
+      <ion-fab-button color="success">
+        <ion-icon name="person-add" routerLink="/utilisateurs" routerDirection="forward"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
     <ion-fab-list side="start">
-      <ion-fab-button color="danger">
-        <ion-icon name="desktop" routerLink="/affectations" routerDirection="forward"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-    <ion-fab-list side="bottom">
-      <ion-fab-button color="danger">
+      <ion-fab-button color="success">
         <ion-icon name="desktop" routerLink="/ordinateurs" routerDirection="forward"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
-    <ion-fab-list side="end">
-      <ion-fab-button color="danger">
-        <ion-icon name="desktop" routerLink="/utilisateurs" routerDirection="forward"></ion-icon>
+    <ion-fab-list side="top">
+      <ion-fab-button color="success">
+        <ion-icon name="clipboard" routerLink="/affectations" routerDirection="forward"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>

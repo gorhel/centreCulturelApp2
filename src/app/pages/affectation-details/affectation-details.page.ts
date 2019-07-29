@@ -4,6 +4,7 @@ import { Utilisateur, UtilisateurService } from './../../services/utilisateur.se
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -22,10 +23,10 @@ export class AffectationDetailsPage implements OnInit {
   affectationId = null;
   ordinateur: Ordinateur[];
   utilisateur: Utilisateur[];
-  affectation: Affectation[];
   affectations: Affectation[];
   affectationSelect = [7, 8, 9, 10, 11, 14, 15, 16, 17];
   public emptyHours = [];
+  todayDate = new Date().getTime();
 
   constructor(
     private route: ActivatedRoute,
@@ -49,6 +50,7 @@ export class AffectationDetailsPage implements OnInit {
     this.affectationService.getAffectations().subscribe(res => {
       this.affectations = res;
     });
+
     /*
     this.affectationService.getAffectations().subscribe(res => {
       this.affectation = res;
@@ -64,7 +66,9 @@ export class AffectationDetailsPage implements OnInit {
     this.affectationService.getAffectation(this.affectationId).subscribe(res =>{
       loading.dismiss();
       this.affectation = res;
+      this.affectationService.getAffectationsHours();
     });
+
   }
 
   async saveAffectation(){
@@ -76,17 +80,17 @@ export class AffectationDetailsPage implements OnInit {
     if(this.affectationId){
       this.affectationService.updateAffectation(this.affectation, this.affectationId).then(() => {
         loading.dismiss();
-        //this.nav.back('home');
+        this.nav.back('home');
       });
     } else {
       this.affectationService.addAffectation(this.affectation).then(()=> {
         loading.dismiss();
-        //this.nav.back('home');
+        this.nav.back('home');
       });
     }
   }
 
-   getAffectationsHours(){
+   async getAffectationsHours(){
     const i;
     const emptyHours = [];
     console.log("this.emptyHours", this.emptyHours, "emptyHours", emptyHours);
@@ -107,7 +111,7 @@ export class AffectationDetailsPage implements OnInit {
     }
     console.log("Heures d ouverture après splice", this.affectationSelect);
     console.log("les heures bookées", emptyHours);
-    
+
     return this.affectationSelect;
   }
 

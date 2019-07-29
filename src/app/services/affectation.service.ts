@@ -49,7 +49,7 @@ export class AffectationService {
   addAffectation(affectation:Affectation){
     return this.affectationsCollection.add(affectation);
   }
-  
+
   removeAffectation(id){
     return this.affectationsCollection.doc(id).delete();
   }

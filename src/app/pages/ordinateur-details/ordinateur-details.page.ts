@@ -47,12 +47,12 @@ export class OrdinateurDetailsPage implements OnInit {
     if(this.ordinateurId){
       this.ordinateurService.updateOrdinateur(this.ordinateur, this.ordinateurId).then(() => {
         loading.dismiss();
-        //this.nav.back('home');
+        this.nav.back('home');
       });
     } else {
       this.ordinateurService.addOrdinateur(this.ordinateur).then(()=> {
         loading.dismiss();
-        //this.nav.back('home');
+        this.nav.back('home');
       });
     }
   }
