@@ -1,4 +1,4 @@
 # centreCulturelApp2
 
-To run the app, launch : 
+To run the app, run : 
 ionic serve
